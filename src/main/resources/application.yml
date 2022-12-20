@@ -1,0 +1,24 @@
+# Configuracion de log
+logging:
+  level:
+    org:
+      hibernate: ERROR
+      springframework: INFO
+    root: INFO
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} {%thread} {%-5level} {%c{l}}: %msg%n'
+server:
+  error:
+    include-stacktrace: never
+
+# Configuracion de conexion a la BD
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/db_logistica?useTimezone=true&serverTimezone=UTC
+    password: Manu7238
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: update
