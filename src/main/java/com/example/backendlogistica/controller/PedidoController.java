@@ -20,12 +20,12 @@ public class PedidoController {
         return ResponseEntity.ok(this.pedidoService.findAll());
     }
 
-    @GetMapping(value = "/by/{guia}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/byPedido/{guia}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByGuiaPedido(@PathVariable("guia") String guia) {
         return ResponseEntity.ok(this.pedidoService.findByGuia(guia));
     }
 
-    @GetMapping(value = "/byPedido/{idCliente}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/by/{idCliente}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByAllCliente(@PathVariable("idCliente") int idCliente) {
         return ResponseEntity.ok(this.pedidoService.findAllByCliente(idCliente));
     }

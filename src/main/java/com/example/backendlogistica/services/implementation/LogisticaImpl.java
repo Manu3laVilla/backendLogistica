@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class LogisticaImpl implements ILogisticaService {
@@ -32,6 +34,19 @@ public class LogisticaImpl implements ILogisticaService {
         }
 
         return dto;
+
+    }
+
+    @Override
+    public LogisticaDTO findByIdLogistica(int id) {
+
+        Optional<Logistica> logistica = this.logisticaRepository.findByIdLogistica(id);
+
+        if(!logistica.isPresent()){
+            return null;
+        }
+
+        return MHelpers.modelMapper().map(logistica.get(), LogisticaDTO.class);
 
     }
 }

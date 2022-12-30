@@ -4,6 +4,7 @@ import com.example.backendlogistica.dto.PedidoDTO;
 import com.example.backendlogistica.entities.Pedido;
 import com.example.backendlogistica.repository.PedidoRepository;
 import com.example.backendlogistica.services.interfaces.IPedidoService;
+import com.example.backendlogistica.utils.generator.Generator;
 import com.example.backendlogistica.utils.helpers.MHelpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -97,6 +98,7 @@ public class PedidoImpl implements IPedidoService {
     public void update(PedidoDTO pedido, int id) {
 
         Optional<Pedido> pedidos = this.pedidoRepository.findById(id);
+        Generator generator = new Generator();
 
         Pedido pedido1 = pedidos.get();
         pedido1.setIdCliente(pedido.getIdCliente());
@@ -106,7 +108,8 @@ public class PedidoImpl implements IPedidoService {
         pedido1.setIdCiudad(pedido.getIdCiudad());
         pedido1.setIdCentro(pedido.getIdCentro());
         pedido1.setCantidad(pedido.getCantidad());
-        pedido1.setCostoEnvio(pedido.getCostoEnvio());
+        pedido1.setCostoEnvio(generator.getCosto(pedido.getIdLogistica().getIdLogistica()));
+        pedido1.setCostoPagar(generator.getCostoPagar(pedido.getIdLogistica().getIdLogistica(), pedido.getCantidad()));
 
         this.pedidoRepository.save(pedido1);
 

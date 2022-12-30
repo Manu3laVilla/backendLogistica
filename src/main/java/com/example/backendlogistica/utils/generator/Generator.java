@@ -1,10 +1,46 @@
 package com.example.backendlogistica.utils.generator;
 
+import com.example.backendlogistica.services.interfaces.ILogisticaService;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 
+@Service
 public class Generator {
+
+    @Autowired
+    private static ILogisticaService logisticaService;
+
+    @Autowired
+    private ILogisticaService logisticaServicee;
+
+    @PostConstruct
+    private void init() {
+        logisticaService = this.logisticaServicee;
+    }
+
+    public int getCosto(int id){
+        int precio = logisticaService.findByIdLogistica(id).getPrecioEnvio();
+        return precio;
+    }
+
+    public int getCostoPagar(int id, int cantidad){
+
+        int precio = logisticaService.findByIdLogistica(id).getPrecioEnvio();
+
+        if(cantidad <= 10){
+            precio = precio;
+        }else if(id == 1 && cantidad >= 10){
+            precio = (int) (precio - precio*0.05);
+        } else if (id == 2 && cantidad >= 10) {
+            precio = (int) (precio - precio*0.03);
+        }
+        return precio;
+    }
 
     public Date dateEntrega(Date fechaEntrega, Date fechaRegistro) {
         Calendar calendar =  Calendar.getInstance();

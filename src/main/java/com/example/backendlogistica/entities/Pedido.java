@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-
 @Data
 @Entity
 @Table(name="pedido")
@@ -46,6 +45,9 @@ public class Pedido implements Serializable {
     @Column(name = "precio_envio")
     private int costoEnvio;
 
+    @Column(name = "precio_pagar")
+    private int costoPagar;
+
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
@@ -57,10 +59,15 @@ public class Pedido implements Serializable {
 
     @PrePersist
     public void prePersist() {
+
         Generator generator = new Generator();
 
         this.fechaRegistro = new Date();
         this.fechaEntrega = generator.dateEntrega(this.fechaEntrega, this.fechaRegistro);
         this.guia = generator.generateGuia();
+        int id = this.idLogistica.getIdLogistica();
+        this.costoPagar = generator.getCostoPagar(id, this.cantidad);
+        this.costoEnvio = generator.getCosto(id);
     }
+
 }

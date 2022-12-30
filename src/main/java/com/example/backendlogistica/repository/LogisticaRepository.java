@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface LogisticaRepository extends JpaRepository<Logistica, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Logistica> findById(int id);
+    Optional<Logistica> findByIdLogistica(int id);
 
 }

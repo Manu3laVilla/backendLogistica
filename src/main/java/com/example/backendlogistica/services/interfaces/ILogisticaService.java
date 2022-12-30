@@ -10,4 +10,6 @@ public interface ILogisticaService {
 
     List<LogisticaDTO> findAll();
 
+    LogisticaDTO findByIdLogistica(int id);
+
 }
