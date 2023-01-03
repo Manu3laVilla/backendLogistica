@@ -23,6 +23,7 @@ public class PedidoDTO implements Serializable {
     private Almacen idCentro;
     private int cantidad;
     private int costoEnvio;
+    private int costoPagar;
     private Date fechaRegistro;
     private Date fechaEntrega;
     private String guia;
