@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Producto> findByNombreProducto(String nombreProducto);
+    Iterable<Producto> findByNombreProducto(String nombreProducto);
 
 }

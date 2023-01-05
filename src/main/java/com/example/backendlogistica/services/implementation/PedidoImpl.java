@@ -38,15 +38,20 @@ public class PedidoImpl implements IPedidoService {
     }
 
     @Override
-    public PedidoDTO findByGuia(String guia) {
+    public List<PedidoDTO> findByGuia(String guia) {
 
-        Optional<Pedido> pedido = this.pedidoRepository.findByGuia(guia);
+        List<PedidoDTO> dto = new ArrayList<>();
 
-        if(!pedido.isPresent()){
-            return null;
+        Iterable<Pedido> pedidos = this.pedidoRepository.findByGuia(guia);
+
+        for (Pedido pedido : pedidos){
+
+            PedidoDTO pedidoDTO = MHelpers.modelMapper().map(pedido, PedidoDTO.class);
+            dto.add(pedidoDTO);
+
         }
 
-        return MHelpers.modelMapper().map(pedido.get(), PedidoDTO.class);
+        return dto;
 
     }
 

@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Pedido> findByGuia(String guia);
+    Iterable<Pedido> findByGuia(String guia);
 
 }

@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Cliente> findByIdentificacion(int identificacion);
+    Iterable<Cliente> findByIdentificacion(int identificacion);
 
 }

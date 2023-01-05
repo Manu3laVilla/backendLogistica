@@ -11,7 +11,7 @@ public interface IClienteService {
 
     List<ClienteDTO> findAll();
 
-    ClienteDTO findByIdentificacion(int identificacion);
+    List<ClienteDTO> findByIdentificacion(int identificacion);
 
     ClienteDTO findById(int id);
 

@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Vehiculo> findByPlacaVehiculo(String placaVehiculo);
+    Iterable<Vehiculo> findByPlacaVehiculo(String placaVehiculo);
 
 }

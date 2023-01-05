@@ -10,7 +10,7 @@ public interface IPedidoService {
 
     List<PedidoDTO> findAll();
 
-    PedidoDTO findByGuia(String guia);
+    List<PedidoDTO> findByGuia(String guia);
 
     PedidoDTO findById(int id);
 

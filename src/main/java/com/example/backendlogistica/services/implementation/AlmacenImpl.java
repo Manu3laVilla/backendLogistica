@@ -38,15 +38,20 @@ public class AlmacenImpl implements IAlmacenService {
     }
 
     @Override
-    public AlmacenDTO findByNombreAlmacen(String nombreAlmacen) {
+    public List<AlmacenDTO> findByNombreAlmacen(String nombreAlmacen) {
 
-        Optional<Almacen> almacen = this.almacenRepository.findByNombreAlmacen(nombreAlmacen);
+        List<AlmacenDTO> dto = new ArrayList<>();
 
-        if(!almacen.isPresent()){
-            return null;
+        Iterable<Almacen> almacens = this.almacenRepository.findByNombreAlmacen(nombreAlmacen);
+
+        for (Almacen almacen : almacens){
+
+            AlmacenDTO almacenDTO = MHelpers.modelMapper().map(almacen, AlmacenDTO.class);
+            dto.add(almacenDTO);
+
         }
 
-        return MHelpers.modelMapper().map(almacen.get(), AlmacenDTO.class);
+        return dto;
 
     }
 

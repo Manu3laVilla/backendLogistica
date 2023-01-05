@@ -11,7 +11,7 @@ public interface IAlmacenService {
 
     List<AlmacenDTO> findAll();
 
-    AlmacenDTO findByNombreAlmacen(String nombreAlmacen);
+    List<AlmacenDTO> findByNombreAlmacen(String nombreAlmacen);
 
     AlmacenDTO findById(int id);
 

@@ -37,16 +37,20 @@ public class ProductoImpl implements IProductoService {
     }
 
     @Override
-    public ProductoDTO findByNombreProducto(String nombreProducto) {
+    public List<ProductoDTO> findByNombreProducto(String nombreProducto) {
 
-        Optional<Producto> producto = this.productoRepository.findByNombreProducto(nombreProducto);
+        List<ProductoDTO> dto = new ArrayList<>();
 
-        if(!producto.isPresent()){
-            return null;
+        Iterable<Producto> productos = this.productoRepository.findByNombreProducto(nombreProducto);
+
+        for (Producto producto : productos){
+
+            ProductoDTO productoDTO = MHelpers.modelMapper().map(producto, ProductoDTO.class);
+            dto.add(productoDTO);
+
         }
 
-        return MHelpers.modelMapper().map(producto.get(), ProductoDTO.class);
-
+        return dto;
     }
 
     @Override

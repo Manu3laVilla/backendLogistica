@@ -37,15 +37,20 @@ public class VehiculoImpl implements IVehiculoService {
     }
 
     @Override
-    public VehiculoDTO findByPlacaVehiculo(String PlacaVehiculo) {
+    public List<VehiculoDTO> findByPlacaVehiculo(String PlacaVehiculo) {
 
-        Optional<Vehiculo> vehiculo = this.vehiculoRepository.findByPlacaVehiculo(PlacaVehiculo);
+        List<VehiculoDTO> dto = new ArrayList<>();
 
-        if(!vehiculo.isPresent()){
-            return null;
+        Iterable<Vehiculo> vehiculos = this.vehiculoRepository.findByPlacaVehiculo(PlacaVehiculo);
+
+        for (Vehiculo vehiculo : vehiculos){
+
+            VehiculoDTO vehiculoDTO = MHelpers.modelMapper().map(vehiculo, VehiculoDTO.class);
+            dto.add(vehiculoDTO);
+
         }
 
-        return MHelpers.modelMapper().map(vehiculo.get(), VehiculoDTO.class);
+        return dto;
 
     }
 

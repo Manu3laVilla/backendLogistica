@@ -10,7 +10,7 @@ public interface IVehiculoService {
 
     List<VehiculoDTO> findAll();
 
-    VehiculoDTO findByPlacaVehiculo(String PlacaVehiculo);
+    List<VehiculoDTO> findByPlacaVehiculo(String PlacaVehiculo);
 
     VehiculoDTO findById(int id);
 

@@ -39,15 +39,20 @@ public class ClienteImpl implements IClienteService {
     }
 
     @Override
-    public ClienteDTO findByIdentificacion(int identificacion) {
+    public List<ClienteDTO> findByIdentificacion(int identificacion) {
 
-        Optional<Cliente> cliente = this.clienteRepository.findByIdentificacion(identificacion);
+        List<ClienteDTO> dto = new ArrayList<>();
 
-        if(!cliente.isPresent()){
-            return null;
+        Iterable<Cliente> clients = this.clienteRepository.findByIdentificacion(identificacion);
+
+        for (Cliente cliente : clients){
+
+            ClienteDTO clienteDTO = MHelpers.modelMapper().map(cliente, ClienteDTO.class);
+            dto.add(clienteDTO);
+
         }
 
-        return MHelpers.modelMapper().map(cliente.get(), ClienteDTO.class);
+        return dto;
 
     }
 

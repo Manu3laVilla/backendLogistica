@@ -10,7 +10,7 @@ public interface IProductoService {
 
     List<ProductoDTO> findAll();
 
-    ProductoDTO findByNombreProducto(String nombreProducto);
+    List<ProductoDTO> findByNombreProducto(String nombreProducto);
 
     ProductoDTO findById(int id);
 

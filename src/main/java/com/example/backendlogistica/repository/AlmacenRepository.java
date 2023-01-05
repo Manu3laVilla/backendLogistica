@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface AlmacenRepository extends JpaRepository<Almacen, Integer> {
 
     @Transactional(readOnly = true)
-    Optional<Almacen> findByNombreAlmacen(String nombreAlmacen);
+    Iterable<Almacen> findByNombreAlmacen(String nombreAlmacen);
 
 }
