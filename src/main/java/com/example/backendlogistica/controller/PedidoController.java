@@ -5,6 +5,7 @@ import com.example.backendlogistica.services.interfaces.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
@@ -30,18 +31,21 @@ public class PedidoController {
         return ResponseEntity.ok(this.pedidoService.findAllByCliente(idCliente));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> savePedido(@RequestBody PedidoDTO request) {
         this.pedidoService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{pedidoId}/delete")
     public ResponseEntity<Object> deletePedido(@PathVariable int pedidoId){
         this.pedidoService.deleteById(pedidoId);
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{pedidoId}/update")
     public ResponseEntity<Object> updatePedido(@RequestBody PedidoDTO request, @PathVariable int pedidoId) {
 

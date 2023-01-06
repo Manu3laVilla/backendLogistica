@@ -6,6 +6,7 @@ import com.example.backendlogistica.services.interfaces.IAlmacenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
@@ -16,34 +17,40 @@ public class AlmacenController {
     @Autowired
     private IAlmacenService almacenService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> index(){
         return ResponseEntity.ok(this.almacenService.findAll());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by/{nombreAlmacen}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByNombreAlmacen(@PathVariable("nombreAlmacen") String nombreAlmacen) {
         return ResponseEntity.ok(this.almacenService.findByNombreAlmacen(nombreAlmacen));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/byAlmacen/{idLogistica}_{idCiudad}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByAllLogisticaCiudad(@PathVariable("idLogistica") int idLogistica,
                                                            @PathVariable("idCiudad") int idCiudad) {
         return ResponseEntity.ok(this.almacenService.findAllByLogisticaAndCiudad(idLogistica, idCiudad));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveAlmacen(@RequestBody AlmacenDTO request) {
         this.almacenService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{almacenId}/delete")
     public ResponseEntity<Object> deleteAlmacen(@PathVariable int almacenId){
         this.almacenService.deleteById(almacenId);
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{almacenId}/update")
     public ResponseEntity<Object> updateAlmacen(@RequestBody AlmacenDTO request, @PathVariable int almacenId) {
 
