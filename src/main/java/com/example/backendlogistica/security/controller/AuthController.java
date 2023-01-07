@@ -11,7 +11,9 @@ import com.example.backendlogistica.security.service.RolService;
 import com.example.backendlogistica.security.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,13 +23,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/logistica/auth")
-@CrossOrigin
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired
@@ -45,8 +53,8 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
-    @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuarioDTO nuevoUsuarioDTO, BindingResult bindingResult){
+    @PostMapping(value = "/nuevo")
+    public ResponseEntity<Object> nuevo(@Valid @RequestBody NuevoUsuarioDTO nuevoUsuarioDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity("Campos Incorrectos o Inválidos",HttpStatus.BAD_REQUEST);
         if(usuarioService.existsByUserName(nuevoUsuarioDTO.getUserName()))
@@ -66,7 +74,7 @@ public class AuthController {
 
         usuario.setIdRolUsuario(roles);
         usuarioService.save(usuario);
-        return new ResponseEntity("Usuario Guardado", HttpStatus.CREATED);
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 
     @PostMapping("/login")
@@ -82,5 +90,4 @@ public class AuthController {
         JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
         return new ResponseEntity(jwtDTO, HttpStatus.OK);
     }
-
 }

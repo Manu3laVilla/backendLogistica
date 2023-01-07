@@ -3,10 +3,17 @@ package com.example.backendlogistica.controller;
 import com.example.backendlogistica.dto.PedidoDTO;
 import com.example.backendlogistica.services.interfaces.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
 
 @CrossOrigin("*")
 @RestController
@@ -31,7 +38,6 @@ public class PedidoController {
         return ResponseEntity.ok(this.pedidoService.findAllByCliente(idCliente));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> savePedido(@RequestBody PedidoDTO request) {
         this.pedidoService.save(request);
@@ -52,5 +58,4 @@ public class PedidoController {
         this.pedidoService.update(request, pedidoId);
         return ResponseEntity.ok(Boolean.TRUE);
     }
-
 }

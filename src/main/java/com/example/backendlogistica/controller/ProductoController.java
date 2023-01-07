@@ -31,7 +31,6 @@ public class ProductoController {
         return ResponseEntity.ok(this.productoService.findByNombreProducto(nombreProducto));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/byLogistica/{idLogistica}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByAllLogistica(@PathVariable("idLogistica") int idLogistica) {
         return ResponseEntity.ok(this.productoService.findAllByLogistica(idLogistica));

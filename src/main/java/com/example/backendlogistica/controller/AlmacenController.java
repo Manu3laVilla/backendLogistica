@@ -29,7 +29,6 @@ public class AlmacenController {
         return ResponseEntity.ok(this.almacenService.findByNombreAlmacen(nombreAlmacen));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/byAlmacen/{idLogistica}_{idCiudad}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByAllLogisticaCiudad(@PathVariable("idLogistica") int idLogistica,
                                                            @PathVariable("idCiudad") int idCiudad) {

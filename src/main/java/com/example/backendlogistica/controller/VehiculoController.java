@@ -28,7 +28,6 @@ public class VehiculoController {
         return ResponseEntity.ok(this.vehiculoService.findByPlacaVehiculo(placaVehiculo));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/byLogistica/{idLogistica}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByAllLogistica(@PathVariable("idLogistica") int idLogistica) {
         return ResponseEntity.ok(this.vehiculoService.findAllByLogistica(idLogistica));
