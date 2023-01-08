@@ -24,4 +24,6 @@ public interface IVehiculoService {
 
     void deleteById(int id);
 
+    boolean existsByPlacaVehiculo(String placa);
+
 }

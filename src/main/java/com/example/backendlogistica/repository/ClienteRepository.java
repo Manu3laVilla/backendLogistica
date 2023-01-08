@@ -13,4 +13,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Transactional(readOnly = true)
     Iterable<Cliente> findByIdentificacion(int identificacion);
 
+    boolean existsByIdentificacion(int identificacion);
+
+    boolean existsByCorreoCliente(String correoCliente);
+
 }

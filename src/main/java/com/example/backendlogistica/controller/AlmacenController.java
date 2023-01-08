@@ -4,6 +4,7 @@ import com.example.backendlogistica.dto.AlmacenDTO;
 import com.example.backendlogistica.dto.VehiculoDTO;
 import com.example.backendlogistica.services.interfaces.IAlmacenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +27,9 @@ public class AlmacenController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by/{nombreAlmacen}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByNombreAlmacen(@PathVariable("nombreAlmacen") String nombreAlmacen) {
+        if(!almacenService.existsByNombreAlmacen(nombreAlmacen))
+            return new ResponseEntity("No Hay Datos Para El Almacén Con Nombre: " + nombreAlmacen,
+                    HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(this.almacenService.findByNombreAlmacen(nombreAlmacen));
     }
 
@@ -38,6 +42,8 @@ public class AlmacenController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveAlmacen(@RequestBody AlmacenDTO request) {
+        if(this.almacenService.existsByNombreAlmacen(request.getNombreAlmacen()))
+            return new ResponseEntity("El Nombre De Almacén Ingresado Ya Existe", HttpStatus.UNPROCESSABLE_ENTITY);
         this.almacenService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
     }

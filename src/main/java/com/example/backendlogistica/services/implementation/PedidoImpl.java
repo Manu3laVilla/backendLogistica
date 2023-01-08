@@ -140,4 +140,9 @@ public class PedidoImpl implements IPedidoService {
         this.pedidoRepository.deleteById(id);
 
     }
+
+    @Override
+    public boolean existsByGuia(String guia) {
+        return this.pedidoRepository.existsByGuia(guia);
+    }
 }

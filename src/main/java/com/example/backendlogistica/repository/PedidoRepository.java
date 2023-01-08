@@ -13,4 +13,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     @Transactional(readOnly = true)
     Iterable<Pedido> findByGuia(String guia);
 
+    boolean existsByGuia(String guia);
+
 }

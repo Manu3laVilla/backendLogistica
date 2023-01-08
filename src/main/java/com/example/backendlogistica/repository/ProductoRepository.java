@@ -13,4 +13,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Transactional(readOnly = true)
     Iterable<Producto> findByNombreProducto(String nombreProducto);
 
+    boolean existsByNombreProducto(String nombreProducto);
+
 }

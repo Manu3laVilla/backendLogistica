@@ -13,4 +13,6 @@ public interface AlmacenRepository extends JpaRepository<Almacen, Integer> {
     @Transactional(readOnly = true)
     Iterable<Almacen> findByNombreAlmacen(String nombreAlmacen);
 
+    boolean existsByNombreAlmacen(String nombreAlmacen);
+
 }

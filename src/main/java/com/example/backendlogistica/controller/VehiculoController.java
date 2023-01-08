@@ -3,6 +3,7 @@ package com.example.backendlogistica.controller;
 import com.example.backendlogistica.dto.VehiculoDTO;
 import com.example.backendlogistica.services.interfaces.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +26,8 @@ public class VehiculoController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by/{placaVehiculo}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByNombreProducto(@PathVariable("placaVehiculo") String placaVehiculo) {
+        if(!this.vehiculoService.existsByPlacaVehiculo(placaVehiculo))
+            return new ResponseEntity("No Hay Datos Para La Placa De Vehículo: " + placaVehiculo, HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(this.vehiculoService.findByPlacaVehiculo(placaVehiculo));
     }
 
@@ -36,6 +39,8 @@ public class VehiculoController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveVehiculo(@RequestBody VehiculoDTO request) {
+        if(this.vehiculoService.existsByPlacaVehiculo(request.getPlacaVehiculo()))
+            return new ResponseEntity("La Placa Ingresada Ya Existe", HttpStatus.UNPROCESSABLE_ENTITY);
         this.vehiculoService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
     }

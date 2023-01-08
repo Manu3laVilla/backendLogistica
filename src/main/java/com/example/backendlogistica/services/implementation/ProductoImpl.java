@@ -130,4 +130,9 @@ public class ProductoImpl implements IProductoService {
         this.productoRepository.deleteById(id);
 
     }
+
+    @Override
+    public boolean existsByNombreProducto(String nombreProducto) {
+        return this.productoRepository.existsByNombreProducto(nombreProducto);
+    }
 }

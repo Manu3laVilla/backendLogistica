@@ -24,4 +24,6 @@ public interface IPedidoService {
 
     void deleteById(int id);
 
+    boolean existsByGuia(String guia);
+
 }

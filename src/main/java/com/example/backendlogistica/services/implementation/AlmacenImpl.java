@@ -132,4 +132,9 @@ public class AlmacenImpl implements IAlmacenService {
     public void deleteById(int id) {
         this.almacenRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsByNombreAlmacen(String nombreAlmacen) {
+        return this.almacenRepository.existsByNombreAlmacen(nombreAlmacen);
+    }
 }

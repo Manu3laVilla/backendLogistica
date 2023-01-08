@@ -131,4 +131,9 @@ public class VehiculoImpl implements IVehiculoService {
         this.vehiculoRepository.deleteById(id);
 
     }
+
+    @Override
+    public boolean existsByPlacaVehiculo(String placa) {
+        return this.vehiculoRepository.existsByPlacaVehiculo(placa);
+    }
 }

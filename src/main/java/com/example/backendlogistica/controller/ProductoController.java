@@ -3,6 +3,7 @@ package com.example.backendlogistica.controller;
 import com.example.backendlogistica.dto.ProductoDTO;
 import com.example.backendlogistica.services.interfaces.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +29,9 @@ public class ProductoController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/by/{nombreProducto}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByNombreProducto(@PathVariable("nombreProducto") String nombreProducto) {
+        if(!this.productoService.existsByNombreProducto(nombreProducto))
+            return new ResponseEntity("No Hay Datos Para El Producto Con Nombre: " + nombreProducto,
+                    HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(this.productoService.findByNombreProducto(nombreProducto));
     }
 

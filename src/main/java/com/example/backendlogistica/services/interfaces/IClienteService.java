@@ -23,4 +23,8 @@ public interface IClienteService {
 
     void deleteById(int id);
 
+    boolean existsByIdentificacion(int identificacion);
+
+    boolean existsByCorreoCliente(String correoCliente);
+
 }

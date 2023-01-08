@@ -116,6 +116,16 @@ public class ClienteImpl implements IClienteService {
 
     }
 
+    @Override
+    public boolean existsByIdentificacion(int identificacion) {
+        return clienteRepository.existsByIdentificacion(identificacion);
+    }
+
+    @Override
+    public boolean existsByCorreoCliente(String correoCliente) {
+        return clienteRepository.existsByCorreoCliente(correoCliente);
+    }
+
     private ClienteDTO convertToClienteDTO(final Cliente cliente){
         return MHelpers.modelMapper().map(cliente, ClienteDTO.class);
     }

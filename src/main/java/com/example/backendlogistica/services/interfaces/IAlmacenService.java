@@ -25,4 +25,6 @@ public interface IAlmacenService {
 
     void deleteById(int id);
 
+    boolean existsByNombreAlmacen(String nombreAlmacen);
+
 }

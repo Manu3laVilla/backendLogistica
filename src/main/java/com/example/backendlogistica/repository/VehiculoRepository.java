@@ -13,4 +13,7 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
     @Transactional(readOnly = true)
     Iterable<Vehiculo> findByPlacaVehiculo(String placaVehiculo);
 
+    boolean existsByPlacaVehiculo(String placa);
+
+
 }

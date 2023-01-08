@@ -24,4 +24,6 @@ public interface IProductoService {
 
     void deleteById(int id);
 
+    boolean existsByNombreProducto(String nombreProducto);
+
 }

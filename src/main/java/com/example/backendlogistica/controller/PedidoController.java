@@ -4,6 +4,7 @@ import com.example.backendlogistica.dto.PedidoDTO;
 import com.example.backendlogistica.services.interfaces.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,8 @@ public class PedidoController {
 
     @GetMapping(value = "/byPedido/{guia}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByGuiaPedido(@PathVariable("guia") String guia) {
+        if(!pedidoService.existsByGuia(guia))
+            return new ResponseEntity("No Hay Datos Para La Guía: " + guia, HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(this.pedidoService.findByGuia(guia));
     }
 
@@ -40,6 +43,8 @@ public class PedidoController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> savePedido(@RequestBody PedidoDTO request) {
+        if(request.getCantidad() == 0)
+            return new ResponseEntity("Debe Ingresar Una Cantidad Superior A 0" ,HttpStatus.UNPROCESSABLE_ENTITY);
         this.pedidoService.save(request);
         return ResponseEntity.ok(Boolean.TRUE);
     }
@@ -54,7 +59,8 @@ public class PedidoController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{pedidoId}/update")
     public ResponseEntity<Object> updatePedido(@RequestBody PedidoDTO request, @PathVariable int pedidoId) {
-
+        if(request.getCantidad() == 0)
+            return new ResponseEntity("Debe Ingresar Una Cantidad Superior A 0" ,HttpStatus.UNPROCESSABLE_ENTITY);
         this.pedidoService.update(request, pedidoId);
         return ResponseEntity.ok(Boolean.TRUE);
     }
