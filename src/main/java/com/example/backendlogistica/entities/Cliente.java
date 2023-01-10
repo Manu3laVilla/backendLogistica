@@ -1,9 +1,7 @@
 package com.example.backendlogistica.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +13,7 @@ public class Cliente implements Serializable {
 
     @Id
     @Column(name = "id_cliente")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "identificacion")
