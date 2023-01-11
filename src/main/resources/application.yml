@@ -15,9 +15,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    username: mnzihofnhrslefb6
-    url: jdbc:mysql://mnzihofnhrslefb6:cbb2jb9an1y22min@u6354r3es4optspf.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/u1i328swowvt5pbz
-    password: cbb2jb9an1y22min
+    username: b466047bb568fa
+    url: jdbc:mysql://b466047bb568fa:8f75b3f4@us-cdbr-east-06.cleardb.net/heroku_e4e3cecd7d8c26a?reconnect=true
+    password: 8f75b3f4
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL57Dialect
@@ -26,6 +26,5 @@ spring:
 
 # Configuracion de seguridad
 jwt:
-  security: false
   secret: secret
   expiration: 3600
