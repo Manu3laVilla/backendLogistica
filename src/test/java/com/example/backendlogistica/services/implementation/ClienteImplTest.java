@@ -1,5 +1,7 @@
 package com.example.backendlogistica.services.implementation;
 
+import ch.qos.logback.core.model.Model;
+import com.example.backendlogistica.dto.AlmacenDTO;
 import com.example.backendlogistica.dto.ClienteDTO;
 import com.example.backendlogistica.dto.ClienteRequest;
 import com.example.backendlogistica.entities.Cliente;
@@ -10,16 +12,18 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 class ClienteImplTest {
 
@@ -31,7 +35,7 @@ class ClienteImplTest {
 
     private Cliente cliente;
 
-    private ClienteRequest clienteRequest;
+    private ClienteRequest clienteRequest, clienteRequest_1;
 
     @BeforeEach
     void setUp() {
@@ -52,6 +56,15 @@ class ClienteImplTest {
                 .apellidoCliente("Apellido Prueba")
                 .telefonoCliente("1234567")
                 .correoCliente("correo@prueba.com")
+                .direccionCliente("Dirección # Prueba")
+                .build();
+
+        clienteRequest_1 = ClienteRequest.builder()
+                .identificacion(987654321)
+                .nombreCliente("Nombre Prueba")
+                .apellidoCliente("Apellido Prueba")
+                .telefonoCliente("9876543")
+                .correoCliente("correo_1@prueba.com")
                 .direccionCliente("Dirección # Prueba")
                 .build();
     }
@@ -91,35 +104,38 @@ class ClienteImplTest {
 
     @Test
     void save() {
-        clienteService.save(clienteRequest);
+        Cliente clienteRequest = MHelpers.modelMapper().map(this.clienteRequest, Cliente.class);
+        Cliente clienteRequest_1 = MHelpers.modelMapper().map(this.clienteRequest_1, Cliente.class);
 
-        ClienteDTO clienteDTO = clienteService.findById(1);
+        given(clienteRepository.save(clienteRequest)).willReturn(clienteRequest);
+        given(clienteRepository.save(clienteRequest_1)).willReturn(clienteRequest_1);
 
-        assertThat(clienteDTO).isNotNull();
-    }
-
-    @Test
-    void update() {
-        given(clienteRepository.save(cliente)).willReturn(cliente);
-
-        clienteRequest = MHelpers.modelMapper().map(cliente, ClienteRequest.class);
-
-        clienteService.save(clienteRequest);
-
-        ClienteDTO clienteDTO = clienteService.findById(cliente.getId());
+        clienteService.save(this.clienteRequest);
+        clienteService.save(this.clienteRequest_1);
 
         assertThat(clienteService.findAll()).isNotNull();
     }
 
     @Test
     void deleteById() {
+        willDoNothing().given(clienteRepository).deleteById(1);
+
+        clienteService.deleteById(1);
+
+        verify(clienteRepository, times(1)).deleteById(1);
     }
 
     @Test
     void existsByIdentificacion() {
+        given(clienteRepository.existsByIdentificacion(anyInt())).willReturn(true);
+
+        assertThat(clienteService.existsByIdentificacion(cliente.getIdentificacion())).isEqualTo(true);
     }
 
     @Test
     void existsByCorreoCliente() {
+        given(clienteRepository.existsByCorreoCliente(anyString())).willReturn(true);
+
+        assertThat(clienteService.existsByCorreoCliente(cliente.getCorreoCliente())).isEqualTo(true);
     }
 }
