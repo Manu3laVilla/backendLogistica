@@ -1,7 +1,6 @@
 package com.example.backendlogistica.repository;
 
 import com.example.backendlogistica.entities.*;
-import com.example.backendlogistica.utils.generator.Generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
