@@ -26,6 +26,6 @@ spring:
 
 # Configuracion de seguridad
 jwt:
-  security: enable
+  security: false
   secret: secret
   expiration: 3600
