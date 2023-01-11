@@ -16,9 +16,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/db_logistica?useTimezone=true&serverTimezone=UTC
-    password: Manu7238
+    username: vtzlu2x2lbtefju2
+    url: jdbc:mysql://eyw6324oty5fsovx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ypnce7psm1wg5ynu?useSSL=false
+    password: g1ftkak877dgfqku
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL57Dialect
