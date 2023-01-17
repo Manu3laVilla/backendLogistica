@@ -1,7 +1,6 @@
 package com.example.backendlogistica.services.interfaces;
 
 import com.example.backendlogistica.dto.AlmacenDTO;
-import com.example.backendlogistica.dto.VehiculoDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

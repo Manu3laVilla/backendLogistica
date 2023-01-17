@@ -142,6 +142,6 @@ class AlmacenImplTest {
     void existsByNombreAlmacen() {
         given(almacenRepository.existsByNombreAlmacen(anyString())).willReturn(true);
 
-        assertThat(almacenService.existsByNombreAlmacen(almacen.getNombreAlmacen())).isEqualTo(true);
+        assertThat(almacenService.existsByNombreAlmacen(almacen.getNombreAlmacen())).isTrue();
     }
 }

@@ -105,18 +105,22 @@ public class PedidoImpl implements IPedidoService {
         Optional<Pedido> pedidos = this.pedidoRepository.findById(id);
         Generator generator = new Generator();
 
-        Pedido pedido1 = pedidos.get();
-        pedido1.setIdCliente(pedido.getIdCliente());
-        pedido1.setIdProducto(pedido.getIdProducto());
-        pedido1.setIdLogistica(pedido.getIdLogistica());
-        pedido1.setIdVehiculo(pedido.getIdVehiculo());
-        pedido1.setIdCiudad(pedido.getIdCiudad());
-        pedido1.setIdCentro(pedido.getIdCentro());
-        pedido1.setCantidad(pedido.getCantidad());
-        pedido1.setCostoEnvio(generator.getCosto(pedido.getIdLogistica().getIdLogistica()));
-        pedido1.setCostoPagar(generator.getCostoPagar(pedido.getIdLogistica().getIdLogistica(), pedido.getCantidad()));
+        if(!pedidos.isEmpty()){
 
-        this.pedidoRepository.save(pedido1);
+            Pedido pedido1 = pedidos.get();
+            pedido1.setIdCliente(pedido.getIdCliente());
+            pedido1.setIdProducto(pedido.getIdProducto());
+            pedido1.setIdLogistica(pedido.getIdLogistica());
+            pedido1.setIdVehiculo(pedido.getIdVehiculo());
+            pedido1.setIdCiudad(pedido.getIdCiudad());
+            pedido1.setIdCentro(pedido.getIdCentro());
+            pedido1.setCantidad(pedido.getCantidad());
+            pedido1.setCostoEnvio(generator.getCosto(pedido.getIdLogistica().getIdLogistica()));
+            pedido1.setCostoPagar(generator.getCostoPagar(pedido.getIdLogistica().getIdLogistica(), pedido.getCantidad()));
+
+            this.pedidoRepository.save(pedido1);
+
+        }
 
     }
 

@@ -129,13 +129,13 @@ class ClienteImplTest {
     void existsByIdentificacion() {
         given(clienteRepository.existsByIdentificacion(anyInt())).willReturn(true);
 
-        assertThat(clienteService.existsByIdentificacion(cliente.getIdentificacion())).isEqualTo(true);
+        assertThat(clienteService.existsByIdentificacion(cliente.getIdentificacion())).isTrue();
     }
 
     @Test
     void existsByCorreoCliente() {
         given(clienteRepository.existsByCorreoCliente(anyString())).willReturn(true);
 
-        assertThat(clienteService.existsByCorreoCliente(cliente.getCorreoCliente())).isEqualTo(true);
+        assertThat(clienteService.existsByCorreoCliente(cliente.getCorreoCliente())).isTrue();
     }
 }

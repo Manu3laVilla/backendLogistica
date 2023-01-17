@@ -136,6 +136,6 @@ class VehiculoImplTest {
     void existsByPlacaVehiculo() {
         given(vehiculoRepository.existsByPlacaVehiculo(anyString())).willReturn(true);
 
-        assertThat(vehiculoService.existsByPlacaVehiculo(vehiculo.getPlacaVehiculo())).isEqualTo(true);
+        assertThat(vehiculoService.existsByPlacaVehiculo(vehiculo.getPlacaVehiculo())).isTrue();
     }
 }

@@ -134,6 +134,6 @@ class ProductoImplTest {
     void existsByNombreProducto() {
         given(productoRepository.existsByNombreProducto(anyString())).willReturn(true);
 
-        assertThat(productoService.existsByNombreProducto(producto.getNombreProducto())).isEqualTo(true);
+        assertThat(productoService.existsByNombreProducto(producto.getNombreProducto())).isTrue();
     }
 }

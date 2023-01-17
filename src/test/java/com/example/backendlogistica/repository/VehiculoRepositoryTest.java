@@ -47,7 +47,6 @@ class VehiculoRepositoryTest {
 
         boolean response = vehiculoRepository.existsByPlacaVehiculo(vehiculo_1.getPlacaVehiculo());
 
-        assertThat(response).isNotNull();
-        assertThat(response).isEqualTo(true);
+        assertThat(response).isTrue();
     }
 }

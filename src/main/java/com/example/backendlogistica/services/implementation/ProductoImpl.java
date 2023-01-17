@@ -102,11 +102,15 @@ public class ProductoImpl implements IProductoService {
 
         Optional<Producto> productos = this.productoRepository.findById(id);
 
-        Producto producto1 = productos.get();
-        producto1.setNombreProducto(producto.getNombreProducto());
-        producto1.setIdLogisticaProducto(producto.getIdLogisticaProducto());
+        if(!productos.isEmpty()){
 
-        this.productoRepository.save(producto1);
+            Producto producto1 = productos.get();
+            producto1.setNombreProducto(producto.getNombreProducto());
+            producto1.setIdLogisticaProducto(producto.getIdLogisticaProducto());
+
+            this.productoRepository.save(producto1);
+
+        }
 
     }
 

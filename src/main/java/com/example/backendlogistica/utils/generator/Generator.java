@@ -24,8 +24,7 @@ public class Generator {
     }
 
     public int getCosto(int id){
-        int precio = logisticaService.findByIdLogistica(id).getPrecioEnvio();
-        return precio;
+        return logisticaService.findByIdLogistica(id).getPrecioEnvio();
     }
 
     public int getCostoPagar(int id, int cantidad){
@@ -33,7 +32,7 @@ public class Generator {
         int precio = logisticaService.findByIdLogistica(id).getPrecioEnvio();
 
         if(cantidad <= 10){
-            precio = precio;
+            return precio;
         }else if(id == 1 && cantidad >= 10){
             precio = (int) (precio - precio*0.05);
         } else if (id == 2 && cantidad >= 10) {
@@ -42,12 +41,14 @@ public class Generator {
         return precio;
     }
 
-    public Date dateEntrega(Date fechaEntrega, Date fechaRegistro) {
+    public Date dateEntrega(Date fechaRegistro) {
         Calendar calendar =  Calendar.getInstance();
         calendar.setTime(fechaRegistro);
         calendar.add(Calendar.DATE, 10);
-        fechaEntrega = calendar.getTime();
-        return fechaEntrega;
+
+        Date fecha = calendar.getTime();
+
+        return fecha;
     }
 
     public String generateGuia(){

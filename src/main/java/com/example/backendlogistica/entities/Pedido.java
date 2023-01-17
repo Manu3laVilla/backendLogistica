@@ -63,7 +63,7 @@ public class Pedido implements Serializable {
         Generator generator = new Generator();
 
         this.fechaRegistro = new Date();
-        this.fechaEntrega = generator.dateEntrega(this.fechaEntrega, this.fechaRegistro);
+        this.fechaEntrega = generator.dateEntrega(this.fechaRegistro);
         this.guia = generator.generateGuia();
         int id = this.idLogistica.getIdLogistica();
         this.costoPagar = generator.getCostoPagar(id, this.cantidad);

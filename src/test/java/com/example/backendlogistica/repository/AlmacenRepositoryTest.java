@@ -50,7 +50,6 @@ class AlmacenRepositoryTest {
 
         boolean response = almacenRepository.existsByNombreAlmacen(almacen_1.getNombreAlmacen());
 
-        assertThat(response).isNotNull();
-        assertThat(response).isEqualTo(true);
+        assertThat(response).isTrue();
     }
 }

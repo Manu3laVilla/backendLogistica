@@ -1,6 +1,5 @@
 package com.example.backendlogistica.security.entities;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

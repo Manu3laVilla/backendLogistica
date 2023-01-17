@@ -83,15 +83,19 @@ public class ClienteImpl implements IClienteService {
 
         Optional<Cliente> clientes = this.clienteRepository.findById(id);
 
-        Cliente cliente1 = clientes.get();
-        cliente1.setIdentificacion(cliente.getIdentificacion());
-        cliente1.setNombreCliente(cliente.getNombreCliente());
-        cliente1.setApellidoCliente(cliente.getApellidoCliente());
-        cliente1.setDireccionCliente(cliente.getDireccionCliente());
-        cliente1.setCorreoCliente(cliente.getCorreoCliente());
-        cliente1.setTelefonoCliente(cliente.getTelefonoCliente());
+        if(!clientes.isEmpty()){
 
-        this.clienteRepository.save(cliente1);
+            Cliente cliente1 = clientes.get();
+            cliente1.setIdentificacion(cliente.getIdentificacion());
+            cliente1.setNombreCliente(cliente.getNombreCliente());
+            cliente1.setApellidoCliente(cliente.getApellidoCliente());
+            cliente1.setDireccionCliente(cliente.getDireccionCliente());
+            cliente1.setCorreoCliente(cliente.getCorreoCliente());
+            cliente1.setTelefonoCliente(cliente.getTelefonoCliente());
+
+            this.clienteRepository.save(cliente1);
+
+        }
 
     }
 

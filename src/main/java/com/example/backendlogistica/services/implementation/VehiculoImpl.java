@@ -103,11 +103,17 @@ public class VehiculoImpl implements IVehiculoService {
 
         Optional<Vehiculo> vehiculos = this.vehiculoRepository.findById(id);
 
-        Vehiculo vehiculo1 = vehiculos.get();
-        vehiculo1.setPlacaVehiculo(vehiculo.getPlacaVehiculo());
-        vehiculo1.setIdLogisticaVehiculo(vehiculo.getIdLogisticaVehiculo());
 
-        this.vehiculoRepository.save(vehiculo1);
+
+        if(!vehiculos.isEmpty()){
+
+            Vehiculo vehiculo1 = vehiculos.get();
+            vehiculo1.setPlacaVehiculo(vehiculo.getPlacaVehiculo());
+            vehiculo1.setIdLogisticaVehiculo(vehiculo.getIdLogisticaVehiculo());
+
+            this.vehiculoRepository.save(vehiculo1);
+
+        }
 
     }
 

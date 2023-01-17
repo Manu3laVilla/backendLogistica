@@ -54,7 +54,6 @@ class PedidoRepositoryTest {
 
         boolean response = pedidoRepository.existsByGuia(pedido.getGuia());
 
-        assertThat(response).isNotNull();
-        assertThat(response).isEqualTo(true);
+        assertThat(response).isTrue();
     }
 }

@@ -20,7 +20,6 @@ public class LogisticaController {
 
     @GetMapping(value = "/by/{idLogistica}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> findByIdLogistica(@PathVariable("idLogistica") int idLogistica) {
-        int precio = this.logisticaService.findByIdLogistica(idLogistica).getPrecioEnvio();
         return ResponseEntity.ok(this.logisticaService.findByIdLogistica(idLogistica).getPrecioEnvio());
     }
 

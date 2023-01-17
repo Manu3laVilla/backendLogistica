@@ -105,12 +105,16 @@ public class AlmacenImpl implements IAlmacenService {
 
         Optional<Almacen> almacenes = this.almacenRepository.findById(id);
 
-        Almacen almacen1 = almacenes.get();
-        almacen1.setNombreAlmacen(almacen.getNombreAlmacen());
-        almacen1.setIdLogisticaAlmacen(almacen.getIdLogisticaAlmacen());
-        almacen1.setIdCiudadAlmacen(almacen.getIdCiudadAlmacen());
+        if(!almacenes.isEmpty()){
 
-        this.almacenRepository.save(almacen1);
+            Almacen almacen1 = almacenes.get();
+            almacen1.setNombreAlmacen(almacen.getNombreAlmacen());
+            almacen1.setIdLogisticaAlmacen(almacen.getIdLogisticaAlmacen());
+            almacen1.setIdCiudadAlmacen(almacen.getIdCiudadAlmacen());
+
+            this.almacenRepository.save(almacen1);
+
+        }
 
     }
 

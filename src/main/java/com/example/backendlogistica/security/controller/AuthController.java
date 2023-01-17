@@ -31,6 +31,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -68,9 +69,14 @@ public class AuthController {
 
         Set<Rol> roles = new HashSet<>();
 
-        roles.add(rolService.getByTipoRol(RolNombre.ROLE_USER).get());
+        Optional<Rol> rolUser = rolService.getByTipoRol(RolNombre.ROLE_USER);
+        Optional<Rol> rolAdmin = rolService.getByTipoRol(RolNombre.ROLE_ADMIN);
+
+        if(!rolUser.isEmpty())
+            roles.add(rolUser.get());
         if(nuevoUsuarioDTO.getIdRolUsuario().contains("admin"))
-            roles.add(rolService.getByTipoRol(RolNombre.ROLE_ADMIN).get());
+            if(!rolAdmin.isEmpty())
+                roles.add(rolAdmin.get());
 
         usuario.setIdRolUsuario(roles);
         usuarioService.save(usuario);

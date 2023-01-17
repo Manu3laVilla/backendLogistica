@@ -46,7 +46,7 @@ class ClienteRepositoryTest {
         given(clienteRepository.existsByIdentificacion(cliente.getIdentificacion()))
                 .willReturn(true);
 
-        assertThat(clienteRepository.existsByIdentificacion(cliente.getIdentificacion())).isEqualTo(true);
+        assertThat(clienteRepository.existsByIdentificacion(cliente.getIdentificacion())).isTrue();
     }
 
     @Test
@@ -55,6 +55,6 @@ class ClienteRepositoryTest {
         given(clienteRepository.existsByCorreoCliente(cliente.getCorreoCliente()))
                 .willReturn(true);
 
-        assertThat(clienteRepository.existsByCorreoCliente(cliente.getCorreoCliente())).isEqualTo(true);
+        assertThat(clienteRepository.existsByCorreoCliente(cliente.getCorreoCliente())).isTrue();
     }
 }

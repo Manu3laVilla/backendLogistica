@@ -133,6 +133,6 @@ class PedidoImplTest {
     void existsByGuia() {
         given(pedidoRepository.existsByGuia(anyString())).willReturn(true);
 
-        assertThat(pedidoService.existsByGuia(pedido.getGuia())).isEqualTo(true);
+        assertThat(pedidoService.existsByGuia(pedido.getGuia())).isTrue();
     }
 }

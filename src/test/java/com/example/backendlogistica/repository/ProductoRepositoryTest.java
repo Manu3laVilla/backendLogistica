@@ -41,6 +41,6 @@ class ProductoRepositoryTest {
 
         boolean response = productoRepository.existsByNombreProducto(producto.getNombreProducto());
 
-        assertThat(response).isEqualTo(true);
+        assertThat(response).isTrue();
     }
 }
